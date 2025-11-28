@@ -1,8 +1,8 @@
-function toggleLearn() {
-    var section = document.getElementById("learn-section");
-    if (section.style.display === "none" || section.style.display === "") {
-        section.style.display = "block";
-    } else {
-        section.style.display = "none";
-    }
+ function toggleLearn() {
+var learnSection = document.getElementById("learn-section");
+if (learnSection.style.display === "none") {
+learnSection.style.display = "block";
+} else {
+learnSection.style.display = "none";
 }
+ }
