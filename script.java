@@ -5,6 +5,5 @@
   } else {
     learnSection.style.display = 'block';
   }
-}
 
 
