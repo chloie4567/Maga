@@ -1,10 +1,6 @@
- function toggleLearn() {
-  var learnSection = document.getElementById('learn-section');
-  if (learnSection.style.display === 'block') {
-    learnSection.style.display = 'none';
-  } else {
-    learnSection.style.display = 'block';
-  }
- }
+ const learnButton = document.querySelector('.button');
+const learnSection = document.getElementById('learn-section');
 
-
+learnButton.addEventListener('click', () => {
+  learnSection.classList.toggle('show');
+});
