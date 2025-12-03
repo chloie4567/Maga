@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #9b4d96, #6a3e80);
+    background:  linear-gradient( o right, #9b4d96, #6a3e80);
     margin: 0;
     padding: 0;
     color: white;
@@ -74,3 +74,4 @@ h1 {
     font-size: 1.1em;
     line-height: 1.6em;
 }
+
