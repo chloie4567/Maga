@@ -1,40 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Alexis's Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Letter For You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Envelope Container */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .envelope {
+            width: 320px;
+            height: 200px;
+            background: #fff8f0;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffb3b3;
+            clip-path: polygon(0 0, 50% 60%, 100% 0);
+            transform-origin: top center;
+            transition: transform 0.8s ease;
+            z-index: 3;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .click-text {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d63384;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Flower Bouquet */
+        .bouquet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.8s ease 0.3s;
+            font-size: 80px;
+            z-index: 2;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+
+        .envelope.open + .bouquet {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Letter Content */
+        .letter-container {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            line-height: 1.8;
+            color: #5a3e36;
+            font-size: 17px;
+            position: relative;
+            border: 3px solid #ffcccc;
+        }
+
+        .letter-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-container::before {
+            content: '💌';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+        }
+
+        .letter-title {
+            text-align: center;
+            color: #d63384;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-decoration: underline wavy #ff9999;
+        }
+
+        .closing {
+            margin-top: 30px;
+            text-align: right;
+            font-style: italic;
+            font-weight: 600;
+            color: #b7246b;
+        }
+
+        /* Floating hearts background */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff8fab;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .envelope { width: 280px; height: 175px; }
+            .bouquet { font-size: 65px; }
+            .letter-container { padding: 30px 20px; font-size: 16px; }
+        }
+    </style>
 </head>
 <body>
-
-    <h1>Welcome to Alexis's Website Portfolio</h1>
-
-    <div class="container">
-
-        <div class="photo-frame">
-            <img src="https://uploads.onecompiler.io/444jt3myh/446cpkesg/1000020117.jpg" alt="Alexis Photo">
+    <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
         </div>
-
-        <p>Hello, I’m Alexis. Welcome to my Portfolio!</p>
-
-        <h2>Hobbies</h2>
-        <ul class="hobbies-list">
-            <li>Reading</li>
-            <li>Eating</li>
-            <li>Sleeping</li>
-            <li>Playing online games</li>
-        </ul>
-
-        <button class="button" onclick="toggleLearn()">What have I learned?</button>
-
-        <div class="learn-section" id="learn-section">
-            <h3>What I have learned</h3>
-            <p>For this portfolio page, I will be sharing what I have learned about web development, including HTML, CSS, JavaScript, and both front-end and back-end development. During our laboratory sessions, our instructor explained that HTML provides the structure of a website by allowing us to add text, images, links, and other essential content. CSS is used to style the website, helping us control colors, fonts, spacing, layouts, backgrounds, and the overall visual design. JavaScript adds interactivity and dynamic behavior, such as animations, buttons, form validation, and other features that make a webpage more engaging for users. I also learned the difference between front-end development, which focuses on everything users see and interact with, and back-end development, which works behind the scenes to manage data, servers, and website functionality. In addition to these concepts, I practiced adding pictures, changing background colors, and modifying fonts to make a website look more appealing. Overall, these lessons helped me understand how websites are built—from their structure and design to their interactive elements and internal processes.</p>
-        </div>
+        <p class="click-text">💌 Click me to open 💌</p>
     </div>
 
-    <script src="script.js"></script>
+    <div class="bouquet">💐</div>
 
+    <div class="letter-container" id="letter">
+        <h2 class="letter-title">To My Forever Love ❤️</h2>
+        
+        <p>Hi love. I just want to tell you that I love you so, so much. Since we started chatting, I already knew that you’re the one I want to marry. I know we still have a lot to go through in life, but I hope we can get through it together, my love.</p>
+        <br>
+        <p>Because I know that we love each other, I hope you never get tired of me. I love you forever, because I know you love me too. My love, I love you so, so much. Even though we haven’t been together for long, I can already feel that you’ll be my wife someday.</p>
+        <br>
+        <p>I just want to keep saying it again and again, I love you. You’ll always be here in my heart, no matter what happens. I pray for a future where we build a home full of laughter and peace.</p>
+        <br>
+        <p>I promise to be patient with you on your bad days, the same way I hope you’ll be patient with me. Every challenge we face just makes me more sure that you’re my person. I don’t need perfection from you, I just need you.</p>
+        <br>
+        <p>Thank you for choosing me, even when things get messy. I’ll keep loving you loudly, quietly, and in all the little moments in between.</p>
+
+        <p class="closing">Yours only,<br>Your future husband 💍❤️</p>
+    </div>
+
+    <script>
+        // Open envelope when clicked
+        const envelope = document.getElementById('envelope');
+        const letter = document.getElementById('letter');
+        let isOpened = false;
+
+        envelope.addEventListener('click', () => {
+            if(!isOpened) {
+                isOpened = true;
+                envelope.classList.add('open');
+                setTimeout(() => {
+                    letter.classList.add('show');
+                    createHearts();
+                }, 1000);
+            }
+        });
+
+        // Floating hearts effect
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = ['❤️','💕','💖','💗','💓'][Math.floor(Math.random()*5)];
+                heart.style.left = Math.random()*100 + 'vw';
+                heart.style.animationDuration = (Math.random()*3 + 4) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 6000);
+            }, 400);
+        }
+    </script>
 </body>
 </html>
